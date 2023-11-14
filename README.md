@@ -1,2 +1,2 @@
 # Anti-ESP
-Makes it harder for a player to use ESP/tracers ig lol
+Super simple anti-esp plugin, blocks invisibles when using esp
