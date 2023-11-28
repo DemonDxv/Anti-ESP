@@ -52,6 +52,13 @@ public class BukkitListener implements Listener {
             user.setTick(user.getTick() + 1);
 
             if (!user.isESP()) {
+
+                if (user.isEntitiesCreated()) {
+                    StreamUtil.filter(user.getEntityHelper1_8().getCustomEntities(), customEntity -> customEntity.
+                                    getCreationData().getEntityType() == EntityData.EntityType.DEFAULT)
+                            .forEach(customEntity -> customEntity.removeEntity(user));
+                }
+
                 return;
             }
 
@@ -91,9 +98,9 @@ public class BukkitListener implements Listener {
                     createEntity(user, location.getY(),
                             location.getX(),
                             location.getZ(), x, y, z);
-
-                    user.setEntitiesCreated(true);
                 }
+
+                user.setEntitiesCreated(true);
             }
         }
     }

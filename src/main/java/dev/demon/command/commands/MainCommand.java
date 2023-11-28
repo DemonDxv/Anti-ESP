@@ -69,8 +69,6 @@ public class MainCommand extends BukkitCommand {
                                     toggleCommand.execute(args, s, commandSender);
                                 } else if (s.equalsIgnoreCase("mode") &&
                                         player.hasPermission("antiesp.command.mode")) {
-                                //    found = true;
-                                  //  forceBanCommand.execute(args, s, commandSender);
                                 }
 
                                 if (!found) commandSender.sendMessage(ChatColor.RED + "Sub command doesn't exist!");

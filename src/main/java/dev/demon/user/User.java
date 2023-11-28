@@ -24,7 +24,7 @@ public class User {
 
     private final List<Integer> currentSpawnedEntites = new CopyOnWriteArrayList<>();
 
-    private boolean isESP;
+    private boolean isESP = true;
 
     private boolean entitiesCreated = false;
 

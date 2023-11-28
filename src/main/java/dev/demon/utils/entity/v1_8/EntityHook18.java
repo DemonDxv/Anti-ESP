@@ -94,6 +94,7 @@ public class EntityHook18 extends CustomEntity {
                 setLastReportedLocation(customLocation);
 
                 sendPacket(new PacketPlayOutEntityTeleport(this.playerESP), user);
+
                 break;
             }
         }
@@ -110,6 +111,7 @@ public class EntityHook18 extends CustomEntity {
         switch (entityType) {
 
             case DEFAULT: {
+
                 Player randomPlayer = getRandomPlayer(user);
 
                 if (randomPlayer == null) {
@@ -123,6 +125,7 @@ public class EntityHook18 extends CustomEntity {
                 EntityPlayer entityPlayer = new EntityPlayer(minecraftServer, worldServer,
                         new GameProfile(UUID.fromString(String.valueOf(randomPlayer.getUniqueId())), name),
                         new PlayerInteractManager(worldServer));
+
 
                 entityPlayer.onGround = false;
 
@@ -162,6 +165,7 @@ public class EntityHook18 extends CustomEntity {
 
                 user.getCurrentSpawnedEntites().add(getEntityID());
                 this.playerESP = entityPlayer;
+
                 break;
             }
         }

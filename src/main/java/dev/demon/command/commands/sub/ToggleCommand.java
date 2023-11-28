@@ -3,6 +3,8 @@ package dev.demon.command.commands.sub;
 
 import dev.demon.AntiESP;
 import dev.demon.user.User;
+import dev.demon.utils.entity.EntityData;
+import dev.demon.utils.stream.StreamUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -18,6 +20,11 @@ public class ToggleCommand {
             if (user.isESP()) {
 
                 AntiESP.getInstance().getUserManager().getDataMap().forEach((uuid, user1) -> user1.setESP(false));
+
+                AntiESP.getInstance().getUserManager().getDataMap().forEach((uuid, user1) ->
+                        StreamUtil.filter(user1.getEntityHelper1_8().getCustomEntities(), customEntity -> customEntity.
+                                getCreationData().getEntityType() == EntityData.EntityType.DEFAULT)
+                        .forEach(customEntity -> customEntity.removeEntity(user1)));
 
                 commandSender.sendMessage(ChatColor.RED + "Anti-ESP have been toggled off!");
             } else {
