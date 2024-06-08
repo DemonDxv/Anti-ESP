@@ -25,6 +25,16 @@ public class CommandManager {
                 "/" + commandName + " toggle",
                 "Toggle on, and off anti esp.", true));
 
+        addCommand(new Command(new MainCommand(commandName),
+                commandName + " distance",
+                "/" + commandName + " distance (max) (min)",
+                "Set the distance.", true));
+
+        addCommand(new Command(new MainCommand(commandName),
+                commandName + " amount",
+                "/" + commandName + " amount (bot-amount)",
+                "Set the amount of bots around the player.", true));
+
 
     /*    addCommand(new Command(new MainCommand(commandName),
                 commandName + " mode",

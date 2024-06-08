@@ -1,6 +1,8 @@
 package dev.demon.command.commands;
 
 import dev.demon.AntiESP;
+import dev.demon.command.commands.sub.AmountCommand;
+import dev.demon.command.commands.sub.DistanceCommand;
 import dev.demon.command.commands.sub.ToggleCommand;
 import dev.demon.user.User;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -19,6 +21,8 @@ public class MainCommand extends BukkitCommand {
     private final String line = ChatColor.GRAY + "§m------------------------------------------";
 
     private final ToggleCommand toggleCommand = new ToggleCommand();
+    private final DistanceCommand distanceCommand = new DistanceCommand();
+    private final AmountCommand amountCommand = new AmountCommand();
 
     public MainCommand(String name) {
         super(name);
@@ -63,14 +67,20 @@ public class MainCommand extends BukkitCommand {
                             } else {
                                 String s = args[0];
                                 boolean found = false;
+
                                 if (s.equalsIgnoreCase("toggle") &&
                                         player.hasPermission("antiesp.command.toggle")) {
                                     found = true;
                                     toggleCommand.execute(args, s, commandSender);
-                                } else if (s.equalsIgnoreCase("mode") &&
-                                        player.hasPermission("antiesp.command.mode")) {
+                                } else if (s.equalsIgnoreCase("distance")
+                                        && player.hasPermission("antiesp.command.distance")) {
+                                    found = true;
+                                    distanceCommand.execute(args, s, commandSender);
+                                } else if (s.equalsIgnoreCase("amount")
+                                        && player.hasPermission("antiesp.command.amount")) {
+                                    found = true;
+                                    amountCommand.execute(args, s, commandSender);
                                 }
-
                                 if (!found) commandSender.sendMessage(ChatColor.RED + "Sub command doesn't exist!");
                             }
                         } else {

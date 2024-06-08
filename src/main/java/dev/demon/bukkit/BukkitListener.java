@@ -78,18 +78,19 @@ public class BukkitListener implements Listener {
                             .forEach(customEntity -> customEntity.tickEntity(user,
                                     new CustomLocation(location.getX() +
                                             MathUtil.getRandomDouble(
-                                                    customEntity.getCreationData().getOffsetX() - 30,
-                                                    customEntity.getCreationData().getOffsetX() + 30),
+                                                    customEntity.getCreationData().getOffsetX() - user.getMinDistance(),
+                                                    customEntity.getCreationData().getOffsetX() + user.getMaxDistance()),
                                             location.getY() + MathUtil.getRandomDouble(
-                                                    customEntity.getCreationData().getOffsetY() - 30,
-                                                    customEntity.getCreationData().getOffsetY() + 30),
+                                                    customEntity.getCreationData().getOffsetY() - user.getMinDistance(),
+                                                    customEntity.getCreationData().getOffsetY() + user.getMaxDistance()),
                                             location.getZ() + MathUtil.getRandomDouble(
-                                                    customEntity.getCreationData().getOffsetZ() - 30,
-                                                    customEntity.getCreationData().getOffsetZ() + 30)),
+                                                    customEntity.getCreationData().getOffsetZ() - user.getMinDistance(),
+                                                    customEntity.getCreationData().getOffsetZ() + user.getMaxDistance())),
                                     true));
                 }
             } else {
-                for (int i = 0; i < 25; i++) {
+                for (int i = 0; i < user.getAmount(); i++) {
+
                     double angle = 2 * Math.PI * i / 50;
                     double x = 50 * Math.cos(angle);
                     double y = location.getY();

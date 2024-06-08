@@ -50,14 +50,14 @@ public class EntityHook18 extends CustomEntity {
 
                 MinecraftServer minecraftServer = ((CraftServer) Bukkit.getServer()).getServer();
 
-                playerESP.onGround = false;
+                playerESP.onGround = user.getTick() % 20 == 0;
 
                 playerESP.setInvisible(true);
 
                 playerESP.setHealth((float) MathUtil
                         .getRandomDouble(MathUtil.getRandomDouble(5.32, 0.0), 20.0));
 
-                playerESP.setSneaking(false);
+                playerESP.setSneaking(user.getTick() % 5 == 0);
 
                 playerESP.setSprinting(false);
 
@@ -72,8 +72,9 @@ public class EntityHook18 extends CustomEntity {
                         new NetworkManager(EnumProtocolDirection.CLIENTBOUND), playerESP);
 
                 int chance = MathUtil.getRandomInteger(0, 100);
+                int hurtTimeRandom = MathUtil.getRandomInteger(9, 1);
 
-                playerESP.hurtTicks = chance < 10 ? 1 : 0;
+                playerESP.hurtTicks = chance < 10 ? hurtTimeRandom : 0;
 
                 customLocation.setPitch(customLocation.getPitch()
                         + MathUtil.getRandomFloat(90F, -90F));
@@ -87,7 +88,6 @@ public class EntityHook18 extends CustomEntity {
 
                 sendPacket(new PacketPlayOutEntityHeadRotation(this.playerESP,
                         (byte) (customLocation.getYaw() * 256 / 360)), user);
-
                 this.playerESP.setLocation(customLocation.getPosX(), customLocation.getPosY(), customLocation.getPosZ(),
                         customLocation.getYaw(), customLocation.getPitch());
 
@@ -132,6 +132,8 @@ public class EntityHook18 extends CustomEntity {
                 entityPlayer.playerInteractManager.b(WorldSettings.EnumGamemode.SURVIVAL);
                 entityPlayer.setInvisible(true);
 
+                entityPlayer.setCustomNameVisible(false);
+
                 entityPlayer.setHealth((float) MathUtil
                         .getRandomDouble(MathUtil.getRandomDouble(5.32, 0.0), 20.0));
 
@@ -150,7 +152,6 @@ public class EntityHook18 extends CustomEntity {
 
                 entityPlayer.playerConnection = new PlayerConnection(minecraftServer,
                         new NetworkManager(EnumProtocolDirection.CLIENTBOUND), entityPlayer);
-
 
                 entityPlayer.setLocation(entityData.getSpawnLocation().getPosX(), entityData.getSpawnLocation().getPosY(),
                         entityData.getSpawnLocation().getPosZ(),

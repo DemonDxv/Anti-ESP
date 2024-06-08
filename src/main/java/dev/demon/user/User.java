@@ -17,6 +17,9 @@ public class User {
     private UUID uuid;
 
     private int tick;
+    private int amount = 25;
+
+    private double maxDistance = 30, minDistance = 30;
 
     private long lastUpdate = -1337L;
 
